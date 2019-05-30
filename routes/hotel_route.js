@@ -1,0 +1,65 @@
+var express=require('express');
+var router=express.Router();
+var hotel=require('../Model/hotel_model');
+
+router.get('/',function(req,res,next){
+    hotel.getAllHotel(function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    });
+});
+router.get('/:id',function(req,res,next){
+    hotel.getHotelById(req.params.id,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    });
+});
+router.post('/',function(req,res,next){
+    hotel.addHotel(req.body,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    });
+});
+router.post('/:id',function(req,res,next){
+    hotel.deleteAllHotel(req.body,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    });
+});
+router.delete('/:id',function(req,res,next){
+    hotel.deleteHotel(req.params.id,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    });
+});
+router.put('/:id',function(req,res,next){
+    hotel.updateHotel(req.params.id,req.body,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    });
+});
+module.exports=router;
